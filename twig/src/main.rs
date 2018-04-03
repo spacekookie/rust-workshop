@@ -69,16 +69,18 @@ impl Worker {
 
 /// Construct a template either from file or from default.
 ///
-/// Burrow one parameter mutably and one immutably.
+/// Borrow one parameter mutably and one immutably.
 fn create_template(template: &mut String, path: &Option<String>) {
     match path {
         Some(_) => {}
-        None => {}
+        None => {
+            template = "";
+        }
     }
 }
 
 fn main() {
-    /* Shows how to burrow with and without mutability */
+    /* Shows how to borrow with and without mutability */
     let mut template = String::new();
     let path = std::env::args().nth(1);
     create_template(&mut template, &path);

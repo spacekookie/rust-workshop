@@ -1,10 +1,10 @@
 //! A small example of how to write a (synchronous) multi-threaded webserver
 #![allow(unused)]
 
-use std::{fs::File, io::{Read, Write}};
 use std::net::{TcpListener, TcpStream};
 use std::sync::{mpsc, Arc, Mutex};
 use std::thread::{self, JoinHandle};
+use std::{fs::File, io::{Read, Write}};
 
 trait FnBox {
     fn call_box(self: Box<Self>);
@@ -84,9 +84,9 @@ fn create_template(template: &mut String, path: &Option<String>) {
     match path {
         Some(p) => {
             let mut f = File::open(p).expect("file not found");
-            f.read_to_string(&mut template);
+            f.read_to_string(template);
         }
-        None => template = format!("HTTP/1.1 200 OK\r\n\r\n{}", default),
+        None => template.push_str(&format!("HTTP/1.1 200 OK\r\n\r\n{}", default)),
     }
 }
 

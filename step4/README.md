@@ -1,8 +1,9 @@
-# Multi threaded server
+# Threading via a threadpool
 
-So let's add some threads. In this step we will spawn a new thread for each request we get.
+Our last server example has a problem: if there are too many requests this will spawn thousands of threads and possibly overload the server completely.
 
-- Spice up the content we return
-  - Either load a user "template" or use a hardcoded default
-- Spawn a new thread for each request
-  - This uses shared state
+So instead what we want to do is used a threadpool which allocates a fixed amount of resources in the beginning, then assignes jobs to threads as they become available. Easy. For this to happen we need to use a few new concepts:
+
+- Structs to hold state and as objects
+- More advanced closures
+- Channels as a method for communication

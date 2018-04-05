@@ -1,5 +1,6 @@
 [package]
-name = "twig"
-description = "A simple webserver for a workshop"
+name = "workshop"
 version = "0.1.0"
 authors = ["Katharina Fey <kookie@spacekookie.de>"]
+
+[dependencies]

@@ -53,6 +53,18 @@ impl<F: FnOnce()> FnBox for F {
 type Job = Box<FnBox + Send + 'static>;
 
 struct ThreadPool {
+
+    // By putting a "_" here it tells the Rust linter "don't worry 
+    // about it being unused". That's pretty handy to get rid of 
+    // warnings that you explicitly know not to be true. 
+    // 
+    // For example, here we only ever create "workers" and save things
+    // into it. Because we never access it, the linter thinks it's
+    // unused and throws a warning. Because clearly, we could just do all
+    // the work in the constructor, right?
+    // 
+    // It doesn't understand the concept of keeping a reference to 
+    // prevent the workers from being destroyed.
     _workers: Vec<Worker>,
     sender: mpsc::Sender<Job>,
 }

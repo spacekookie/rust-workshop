@@ -19,6 +19,9 @@ fn main() {
     }
 }
 
+/// This function checks if an incoming request is valid 
+/// and calls the provided callback with the extracted stream
+/// to act on.
 fn handle_connection<F: 'static>(stream: Result<TcpStream, IoError>, fun: F)
 where
     F: Fn(&mut TcpStream),

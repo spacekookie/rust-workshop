@@ -86,7 +86,7 @@ fn create_template(template: &mut String, path: &Option<String>) {
             let mut f = File::open(p).expect("file not found");
             f.read_to_string(template);
         }
-        None => template.push_str(&format!("HTTP/1.1 200 OK\r\n\r\n{}", default)),
+        None => template.push_str(default),
     }
 }
 
@@ -118,7 +118,7 @@ fn handle_connection(mut stream: TcpStream, template: &String) {
     stream.read(&mut buffer).unwrap();
 
     /* Return a template. Here's one I made earlier */
-    let response = format!("HTTP/1.1 200 OK\r\n\r\n{}", template);
+    let response = format!("HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n{}", template);
     stream.write(response.as_bytes()).unwrap();
     stream.flush().unwrap();
 }

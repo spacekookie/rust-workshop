@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::{Error as IoError, Read, Write};
 use std::net::{TcpListener, TcpStream};
-use std::thread::{self, JoinHandle};
+use std::thread;
 use std::sync::Arc;
 
 fn main() {

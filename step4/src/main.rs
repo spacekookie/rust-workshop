@@ -8,7 +8,7 @@ fn main() {
     /* Load a user template or provide a default one */
     let mut t = String::new();
     let path = std::env::args().nth(1);
-    create_template(&mut t, &path);
+    create_template(&mut t, path);
 
     /* Wrap the template into an Atomic Reference Counter */
     let template = Arc::new(t);
@@ -113,7 +113,7 @@ impl Worker {
 /// Construct a template either from file or from default.
 ///
 /// Borrow one parameter mutably and one immutably.
-fn create_template(template: &mut String, path: &Option<String>) {
+fn create_template(template: &mut String, path: Option<String>) {
     let default = "<!DOCTYPE html>
 <html>
     <head>
